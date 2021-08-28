@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <!--form centering&styling-->
+    <style>
+        .center {
+            width: 15%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid;
+            border-color: black;
+            padding: 20px;
+            font-family: 'Abel', sans-serif;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        name
+        <br>
+        <input type="text" id="fname" placeholder="name" onchange="nameChanged()">
+        <br>
+
+        surname
+        <br>
+        <input type="text" id="lname" placeholder="surname" onchange="surnameChanged()">
+        <br>
+
+        city
+        <br>
+        <select id="cities" onchange="citySelected()">
+            <option value="london">london</option>
+            <option value="berlin">berlin</option>
+            <option value="paris">paris</option>
+            <option value="yeruham">yeruham</option>
+        </select>
+        <br>
+
+        street
+        <br>
+        <input type="text" id="street" placeholder="street" onchange="streetChanged()">
+        <br>
+
+        zip
+        <br>
+        <input type="number" id="zipcode" placeholder="zip" onchange="zipChanged()">
+        <br>
+
+        product
+        <br>
+        <select id="cars" onchange="prodSelected()">
+            <option value=9000 id="honda">honda</option>
+            <option value=7000 id="mazda">mazda</option>
+            <option value=5000 id="kia">kia</option>
+            <option value=1000000 id="susita">susita</option>
+        </select>
+
+        <span>&nbsp;price&nbsp;</span><span style="outline: 1px solid; color: black;" id="priceItem">000</span> $
+        <br>
+
+        quantity
+        <br>
+        <input type="number" id="quantity" placeholder="quantity" onchange="quantChanged()">
+        <br>
+
+        final price
+        <span style="outline: 1px solid; color: black;"><span id="finprice">0000</span></span> $
+        <br>
+        <br>
+
+        <button onclick="countAll()">clickme</button>
+        <br>
+
+    </div>
+    <script>
+        //empty states
+        let user = {
+            name: "defName",
+            surname: "defSurname",
+            city: "defCity",
+            street: "defStreet",
+            zip: "defZip",
+            product: "defProduct",
+            price_per_item: "defItemPrice",
+            quantity: "defQuantity",
+            final_price: "defFinPrice",
+
+        }
+        //new name
+        function nameChanged() {
+            user.name = document.getElementById("fname").value
+        }
+        //new surname
+        function surnameChanged() {
+            user.surname = document.getElementById("lname").value
+        }
+        //new city
+        function citySelected() {
+            user.city = document.getElementById("cities").value
+        }
+        //new street
+        function streetChanged() {
+            user.street = document.getElementById("street").value
+        }
+        //new zip
+        function zipChanged() {
+            user.zip = +document.getElementById("zipcode").value
+        }
+        //put select option "name" as name for user.product
+        function prodSelected() {
+            var x = document.getElementById("cars");
+            var i = x.selectedIndex;
+            user.product = x.options[i].text
+            // price per item "number" now = selected product price    
+            document.getElementById("priceItem").innerHTML = document.getElementById("cars").value
+            // final price now = selected product price
+            document.getElementById("finprice").innerHTML = document.getElementById("cars").value
+            user.price_per_item = +document.getElementById("cars").value
+        }
+        function quantChanged() {
+            //multiply selected cars by quantity = final price
+            user.final_price = document.getElementById("finprice").innerHTML = (document.getElementById("cars").value) * (document.getElementById("quantity").value)
+            user.quantity = +document.getElementById("quantity").value
+        }
+        function countAll() {
+            console.log(user);
+        }
+    </script>
+</body>
+</html>
